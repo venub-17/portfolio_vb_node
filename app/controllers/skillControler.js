@@ -33,5 +33,5 @@ const postSkill = async (req, res) => {
     gError(res, error);
   }
 };
-
+const updateSkill = () => {};
 module.exports = { getAllSkills, postSkill };

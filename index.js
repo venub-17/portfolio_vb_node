@@ -13,6 +13,7 @@ app.use(cors);
 
 // MongoDB Connection
 connectDB();
+// console.log("db connect ", process.env.MONGODB_CONNECT_URL);
 // Routes
 app.use("/skills", skillRouter);
 
