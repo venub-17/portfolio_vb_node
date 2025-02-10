@@ -1,15 +1,17 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const morgan = require("morgan");
 const skillRouter = require("./app/routes/Skills");
 const bodyParser = require("body-parser");
 const connectDB = require("./app/config/db");
-const cors = require("./app/config/corsMiddleware");
+const corsops = require("./app/config/corsMiddleware");
 
 // Middleware
+app.use(cors());
+// app.options("*", cors(corsops));
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(cors);
 
 // MongoDB Connection
 connectDB();
