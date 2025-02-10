@@ -1,17 +1,31 @@
 const cors = require("cors");
 
-var whitelist = [
-  "http://localhost:5173",
-  "https://wonderful-pony-a87fa9.netlify.app",
+// Allowed origins
+const allowedOrigins = [
+  "https://wonderful-pony-a87fa9.netlify.app", // Netlify domain
+  "http://localhost:5173", // Localhost (adjust the port if necessary)
 ];
-const corsOptions = function (req, callback) {
-  var corsOptions;
-  if (whitelist.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false }; // disable CORS for this request
-  }
-  callback(null, corsOptions); // callback expects two parameters: error and options
+
+// CORS configuration
+const corsOptions = {
+  origin: function (origin, callback) {
+    console.log(origin);
+    // Only allow requests from the allowed origins
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error("Not allowed by CORS")); // Reject other origins
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "Authorization",
+  ],
+  credentials: true, // Allow credentials (cookies, Authorization headers, etc.)
 };
 
-module.exports = corsOptions;
+module.exports = cors(corsOptions);
