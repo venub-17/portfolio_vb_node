@@ -2,7 +2,7 @@ const cors = require("cors");
 
 // Allowed origins
 const allowedOrigins = [
-  "https://wonderful-pony-a87fa9.netlify.app", // Netlify domain
+  "https://vb-portfolio-17.netlify.app", // Netlify domain
   "http://localhost:5173", // Localhost (adjust the port if necessary)
 ];
 
