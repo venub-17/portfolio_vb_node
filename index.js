@@ -3,7 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const connectDB = require("./app/config/db");
-// const cors = require("cors");
+const cors = require("cors");
 
 const skillRouter = require("./app/routes/Skills");
 const authRouter = require("./app/routes/authRouter");
@@ -12,9 +12,9 @@ const authRouter = require("./app/routes/authRouter");
 const corsops = require("./app/config/corsMiddleware");
 
 // Middleware
+app.use(cors());
 // app.use(corsops);
-app.use(corsops);
-app.options("*", corsops);
+// app.options("*", corsops);
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
