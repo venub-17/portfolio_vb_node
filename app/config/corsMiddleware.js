@@ -3,14 +3,14 @@ const cors = require("cors");
 // Allowed origins
 const allowedOrigins = [
   "https://vb-portfolio-17.netlify.app", // Netlify domain
-  "http://localhost:5173", // Localhost (adjust the port if necessary)
+  "http://localhost:3000", // Localhost (adjust the port if necessary)
 ];
 
 // CORS configuration
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log(origin);
     // Only allow requests from the allowed origins
+    console.log(origin);
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true); // Allow the request
     } else {

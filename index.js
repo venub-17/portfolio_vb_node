@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const skillRouter = require("./app/routes/Skills");
 const bodyParser = require("body-parser");
 const connectDB = require("./app/config/db");
-const cors = require("cors");
+// const cors = require("cors");
+
+const skillRouter = require("./app/routes/Skills");
+const authRouter = require("./app/routes/authRouter");
+// const session = require("express-session");
 
 const corsops = require("./app/config/corsMiddleware");
 
@@ -17,9 +20,12 @@ app.use(bodyParser.json());
 
 // MongoDB Connection
 connectDB();
+
 // console.log("db connect ", process.env.MONGODB_CONNECT_URL);
 // Routes
+// app.use(session({ secret: "my secret", resave: false }));
 app.use("/skills", skillRouter);
+app.use("/auth", authRouter);
 
 // Handle 404 Errors
 app.use((req, res, next) => {
