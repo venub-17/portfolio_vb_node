@@ -7,6 +7,7 @@ const cors = require("cors");
 
 const skillRouter = require("./app/routes/Skills");
 const authRouter = require("./app/routes/authRouter");
+const resumeRoute = require("./app/routes/resumeRouter");
 // const session = require("express-session");
 
 const corsops = require("./app/config/corsMiddleware");
@@ -24,8 +25,9 @@ connectDB();
 // console.log("db connect ", process.env.MONGODB_CONNECT_URL);
 // Routes
 // app.use(session({ secret: "my secret", resave: false }));
-app.use("/skills", skillRouter);
-app.use("/auth", authRouter);
+app.use("/api/skills", skillRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/resume", resumeRoute);
 
 // Handle 404 Errors
 app.use((req, res, next) => {
