@@ -20,18 +20,20 @@ const getAllSkills = async (req, res) => {
 
 const postSkill = async (req, res) => {
   try {
-    const skill = new Skill({
-      skill_title: req.body.skill_title,
-      newSkill: req.body.newSkill,
+    const skill = await Skill.find();
+
+    const newSkill = new Skill({
+      skill_link: req.body.skill_link,
+      skill_name: req.body.skill_name,
     });
-    await skill.save();
+
+    await newSkill.save();
     res.status(200).json({
       message: "Skill saved successfully",
-      skill: skill,
     });
   } catch (error) {
     gError(res, error);
   }
 };
-const updateSkill = () => {};
+// const updateSkill = () => {};
 module.exports = { getAllSkills, postSkill };

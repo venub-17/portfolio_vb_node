@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const SkillSchema = new Schema({
-  skill_title: {
+  skill_link: {
     type: String,
     required: true,
   },
-  newSkill: {
-    type: Array,
+  skill_name: {
+    type: String,
     required: true,
   },
 });

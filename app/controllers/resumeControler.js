@@ -20,6 +20,7 @@ const storage = multer.memoryStorage();
 // Upload new file
 const uploadFile = async (req, res) => {
   try {
+    console.log(req);
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded" });
     }

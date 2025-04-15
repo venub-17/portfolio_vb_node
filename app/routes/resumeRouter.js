@@ -12,6 +12,6 @@ const upload = multer({
 
 // Apply the multer middleware for file upload and then call the controller
 router.post("/upload", upload, resumeControler.uploadFile);
-router.get("/download", upload, resumeControler.getRecentFile);
+router.get("/download", resumeControler.getRecentFile);
 
 module.exports = router;
