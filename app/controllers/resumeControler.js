@@ -56,6 +56,7 @@ const uploadFile = async (req, res) => {
 
     uploadStream.on("finish", async () => {
       // Save the new file metadata to the NewFile collection
+      console.log(req.file.mimetype, "file upload");
       const newFile = new NewFile({
         filename: req.file.originalname,
         fileId: uploadStream.id,
@@ -91,7 +92,7 @@ const getRecentFile = async (req, res) => {
       console.error("Error reading file from GridFS:", err);
       return res.status(500).json({ message: "Error retrieving file" });
     });
-
+    console.log(file.contentType, "type content");
     res.set("Content-Type", file.contentType || "application/octet-stream");
     downloadStream.pipe(res);
   } catch (err) {
