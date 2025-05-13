@@ -8,6 +8,7 @@ const cors = require("cors");
 const skillRouter = require("./app/routes/Skills");
 const authRouter = require("./app/routes/authRouter");
 const resumeRoute = require("./app/routes/resumeRouter");
+const resumeDownloaderRouter = require("./app/routes/resumeDownloader");
 // const session = require("express-session");
 
 const corsops = require("./app/config/corsMiddleware");
@@ -28,6 +29,7 @@ connectDB();
 app.use("/api/skills", skillRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/resume", resumeRoute);
+app.use("/api/email-sent", resumeDownloaderRouter);
 
 // Handle 404 Errors
 app.use((req, res, next) => {
