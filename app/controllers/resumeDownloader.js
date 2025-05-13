@@ -38,7 +38,7 @@ const sendEmail = async (name, email) => {
     from: "venuby95@gmail.com",
     to: email,
     subject: "Thank You for Downloading My Resume",
-    text: `Hi ${nameC},\n\nThank you for taking the time to download my resume. I hope my skills and experience align with what you're looking for. If you believe there's a potential fit, I’d be happy to discuss further.\n\nPlease feel free to reach me at beenaveni.venu@gmail.com.\n\nBest regards,\nVenu B.\n\nMobile:470-297-2720`,
+    text: `Hi ${nameC},\n\nThank you for taking the time to download my resume. I hope my skills and experience align with what you're looking for. If you believe there's a potential fit, I’d be happy to discuss further.\n\nPlease feel free to reach me at beenaveni.venu@gmail.com.\n\nBest regards,\nVenu B.\nMobile:470-297-2720`,
   };
   try {
     const info = await transport.sendMail(mailOptions);
