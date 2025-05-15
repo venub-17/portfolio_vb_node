@@ -29,7 +29,7 @@ connectDB();
 app.use("/api/skills", skillRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/resume", resumeRoute);
-app.use("/api/email-sent", resumeDownloaderRouter);
+app.use("/api/resumeDownload", resumeDownloaderRouter);
 
 // Handle 404 Errors
 app.use((req, res, next) => {

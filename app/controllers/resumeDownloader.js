@@ -2,12 +2,24 @@ const { format } = require("morgan");
 const resumeDownloader = require("../models/resumeDownload");
 const nodemailer = require("nodemailer");
 
+const getResumeDownloaders = async (req, res) => {
+  try {
+    const users = await resumeDownloader.find();
+    res.status(200).json({
+      users: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
 const postResumeDownload = async (req, res) => {
   try {
     const { name, email, role } = req.body;
     sendEmail(name, email);
     const newUser = await resumeDownloader({
-      name,
+      name: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
       email,
       role,
     });
@@ -47,4 +59,5 @@ const sendEmail = async (name, email) => {
     }
   }
 };
-module.exports = { postResumeDownload };
+
+module.exports = { getResumeDownloaders, postResumeDownload };
