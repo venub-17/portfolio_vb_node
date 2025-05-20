@@ -1,7 +1,9 @@
 const { format } = require("morgan");
 const resumeDownloader = require("../models/resumeDownload");
 const nodemailer = require("nodemailer");
+const axios = require("axios");
 
+const ZB_API_KEY = "44a49cab4f234096b79afa427eaa2a1f";
 const getResumeDownloaders = async (req, res) => {
   try {
     const users = await resumeDownloader.find();
@@ -17,16 +19,33 @@ const getResumeDownloaders = async (req, res) => {
 const postResumeDownload = async (req, res) => {
   try {
     const { name, email, role } = req.body;
-    sendEmail(name, email);
-    const newUser = await resumeDownloader({
-      name: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
-      email,
-      role,
-    });
-    await newUser.save();
-    res.status(200).json({
-      message: "User Saved Successfully",
-    });
+    const zbResponse = await axios.get(
+      `https://api.zerobounce.net/v2/validate`,
+      {
+        params: {
+          api_key: ZB_API_KEY,
+          email: email,
+          ip_address: "", // optional
+        },
+      }
+    );
+
+    if (zbResponse.data.status === "invalid") {
+      res.status(400).json({
+        message: "Invalid or undeliverable email.",
+      });
+    } else {
+      sendEmail(name, email);
+      const newUser = await resumeDownloader({
+        name: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
+        email,
+        role,
+      });
+      await newUser.save();
+      res.status(200).json({
+        message: "User Saved Successfully",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: error,
@@ -37,6 +56,7 @@ const postResumeDownload = async (req, res) => {
 const sendEmail = async (name, email) => {
   const nameC = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
   console.log(nameC);
+
   const transport = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
