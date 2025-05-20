@@ -1,9 +1,10 @@
-const { format } = require("morgan");
 const resumeDownloader = require("../models/resumeDownload");
 const nodemailer = require("nodemailer");
 const axios = require("axios");
+require("dotenv").config();
 
-const ZB_API_KEY = "163bc4dc403d477fb96c8c8781078045";
+const apiKey = process.env.ZB_API_KEY;
+
 const getResumeDownloaders = async (req, res) => {
   try {
     const users = await resumeDownloader.find();
@@ -23,7 +24,7 @@ const postResumeDownload = async (req, res) => {
       `https://api.zerobounce.net/v2/validate`,
       {
         params: {
-          api_key: ZB_API_KEY,
+          api_key: apiKey,
           email: email,
           ip_address: "", // optional
         },
