@@ -3,7 +3,7 @@ const resumeDownloader = require("../models/resumeDownload");
 const nodemailer = require("nodemailer");
 const axios = require("axios");
 
-const ZB_API_KEY = "44a49cab4f234096b79afa427eaa2a1f";
+const ZB_API_KEY = "163bc4dc403d477fb96c8c8781078045";
 const getResumeDownloaders = async (req, res) => {
   try {
     const users = await resumeDownloader.find();
@@ -29,7 +29,7 @@ const postResumeDownload = async (req, res) => {
         },
       }
     );
-
+    console.log(zbResponse.data, "res");
     if (zbResponse.data.status === "invalid") {
       res.status(400).json({
         message: "Invalid or undeliverable email.",
