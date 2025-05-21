@@ -13,6 +13,7 @@ const postContact = async (req, res) => {
     //     params: {
     //       api_key: apiKey,
     //       email: email,
+    //       ip_address: "",
     //     },
     //   }
     // );
@@ -35,7 +36,7 @@ const postContact = async (req, res) => {
     });
     // }
   } catch (error) {
-    console.log(error);
+    console.log(error, "error");
     res.status(500).json({
       message: error,
     });

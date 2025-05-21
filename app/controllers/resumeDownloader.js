@@ -18,7 +18,7 @@ const getResumeDownloaders = async (req, res) => {
 };
 const postResumeDownload = async (req, res) => {
   try {
-    // const { name, email, role } = req.body;
+    const { name, email, role } = req.body;
     // const zbResponse = await axios.get(
     //   `https://api.zerobounce.net/v2/validate`,
     //   {
