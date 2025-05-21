@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const NewFile = require("../models/resumeModel");
 const OldFile = require("../models/oldResumeModel");
-const connectDB = require("../../app/config/db");
+const connectDB = require("../../app/middleware/db");
 const multer = require("multer");
 
 // Initialize GridFSBucket
